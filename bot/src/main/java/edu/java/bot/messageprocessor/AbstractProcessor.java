@@ -1,13 +1,14 @@
 package edu.java.bot.messageprocessor;
 
+import com.pengrad.telegrambot.model.Update;
+
 public abstract class AbstractProcessor {
 
-    private AbstractProcessor nextMessageProcessor;
+    AbstractProcessor nextMessageProcessor;
 
-    public AbstractProcessor setNextProcessor(AbstractProcessor nextProcessor) {
-        nextMessageProcessor = nextProcessor;
-        return nextProcessor;
+    public AbstractProcessor (AbstractProcessor nextProcessor) {
+        nextMessageProcessor =  nextProcessor;
     }
 
-    abstract public String process();
+    abstract public String process(Update elem);
 }
