@@ -20,11 +20,12 @@ public class Bot {
     }
 
     public void start() {
-
+        TelegramBotService.setMenuCommands(telegramBot);
         telegramBot.setUpdatesListener(new UpdatesListener() {
             @Override
             public int process(List<Update> list) {
                 for (var elem : list) {
+
                     var res = ProcessorHolder.PROCESSOR.process(elem);
                     var id = elem.message().chat().id();
                     SendMessage request = new SendMessage(id, res);
