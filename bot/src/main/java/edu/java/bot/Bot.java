@@ -5,10 +5,14 @@ import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.request.SendMessage;
 import edu.java.bot.configuration.ApplicationConfig;
 import edu.java.bot.messageprocessor.ProcessorHolder;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Bot {
 
-    private final TelegramBot telegramBot;
+    private final TelegramBot telegramBot ;
+
+    public static final Map<Long, BotStatus> BOT_STATUS_MAP = new HashMap<>();
 
     public Bot(ApplicationConfig config) {
         telegramBot = new TelegramBot(config.telegramToken());
