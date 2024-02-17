@@ -11,7 +11,7 @@ public class ListProcessor extends AbstractProcessor {
     @Override
     public String process(Update elem) {
         if (elem.message().text().strip().equals("/list")) {
-            return "/list";
+            return "The list of links is shown";
         }
         return nextMessageProcessor.process(elem);
     }

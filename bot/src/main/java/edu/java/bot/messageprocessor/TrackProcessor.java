@@ -14,7 +14,7 @@ public class TrackProcessor extends AbstractProcessor {
     public String process(Update elem) {
         if (elem.message().text().strip().equals("/track")) {
             Bot.BOT_STATUS_MAP.put(elem.message().chat().id(), BotStatus.START_TRACKING);
-            return "/track";
+            return "Enter the tracking link";
         }
         return nextMessageProcessor.process(elem);
     }

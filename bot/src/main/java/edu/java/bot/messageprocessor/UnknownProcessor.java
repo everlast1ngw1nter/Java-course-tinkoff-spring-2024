@@ -10,6 +10,6 @@ public class UnknownProcessor extends AbstractProcessor {
 
     @Override
     public String process(Update elem) {
-        return "Получена неизвестная команда";
+        return "An unknown command was received";
     }
 }

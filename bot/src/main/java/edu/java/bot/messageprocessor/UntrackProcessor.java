@@ -14,7 +14,7 @@ public class UntrackProcessor extends AbstractProcessor {
     public String process(Update elem) {
         if (elem.message().text().strip().equals("/untrack")) {
             Bot.BOT_STATUS_MAP.put(elem.message().chat().id(), BotStatus.START_UNTRACKING);
-            return "/untrack";
+            return "Enter the link to stop tracking";
         }
         return nextMessageProcessor.process(elem);
     }

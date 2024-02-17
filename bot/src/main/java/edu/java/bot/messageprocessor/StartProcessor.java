@@ -11,7 +11,7 @@ public class StartProcessor extends AbstractProcessor {
     @Override
     public String process(Update elem) {
         if (elem.message().text().strip().equals("/start")) {
-            return "/start";
+            return "The user is registered";
         }
         return nextMessageProcessor.process(elem);
     }
