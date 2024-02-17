@@ -13,14 +13,13 @@ import static org.mockito.Mockito.when;
 public class ProcessorsTest {
 
     private Update update;
-    private Chat chat;
     private Message message;
 
     @BeforeEach
     void initMocks() {
         update = mock(Update.class);
         message =  mock(Message.class);
-        chat = mock(Chat.class);
+        Chat chat = mock(Chat.class);
         var chatId = 1L;
         when(update.message()).thenReturn(message);
         when(message.chat()).thenReturn(chat);
@@ -56,7 +55,7 @@ public class ProcessorsTest {
     @Test
     public void trackingSiteProcessorTest() {
         Bot.BOT_STATUS_MAP.put(1L, BotStatus.START_TRACKING);
-        when(message.text()).thenReturn("http");
+        when(message.text()).thenReturn("https://github.com/sanyarnd/tinkoff-java-course-2023/");
         var text = ProcessorHolder.PROCESSOR.process(update);
         assertEquals("Link tracking started", text);
     }
@@ -86,7 +85,7 @@ public class ProcessorsTest {
     @Test
     public void untrackingSiteProcessorTest() {
         Bot.BOT_STATUS_MAP.put(1L, BotStatus.START_UNTRACKING);
-        when(message.text()).thenReturn("http");
+        when(message.text()).thenReturn("https://github.com/sanyarnd/tinkoff-java-course-2023/");
         var text = ProcessorHolder.PROCESSOR.process(update);
         assertEquals("Link tracking finished", text);
     }

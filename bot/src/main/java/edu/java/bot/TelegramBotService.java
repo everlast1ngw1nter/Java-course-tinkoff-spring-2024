@@ -6,6 +6,9 @@ import com.pengrad.telegrambot.request.SetMyCommands;
 
 public class TelegramBotService {
 
+    private TelegramBotService() {
+    }
+
     public static void setMenuCommands(TelegramBot bot) {
 
         BotCommand[] commands = new BotCommand[]{

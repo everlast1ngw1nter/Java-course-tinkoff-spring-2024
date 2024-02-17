@@ -1,6 +1,5 @@
 package edu.java.bot.messageprocessor;
 
-import com.pengrad.telegrambot.model.BotCommand;
 import com.pengrad.telegrambot.model.Update;
 
 public class HelpProcessor extends AbstractProcessor {

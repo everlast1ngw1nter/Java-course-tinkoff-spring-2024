@@ -6,7 +6,7 @@ public abstract class AbstractProcessor {
 
     AbstractProcessor nextMessageProcessor;
 
-    public AbstractProcessor (AbstractProcessor nextProcessor) {
+    public AbstractProcessor(AbstractProcessor nextProcessor) {
         nextMessageProcessor =  nextProcessor;
     }
 

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Bot {
 
-    private final TelegramBot telegramBot ;
+    private final TelegramBot telegramBot;
 
     public static final Map<Long, BotStatus> BOT_STATUS_MAP = new HashMap<>();
 
