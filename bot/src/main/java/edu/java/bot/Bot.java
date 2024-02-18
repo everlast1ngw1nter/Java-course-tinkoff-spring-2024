@@ -20,8 +20,8 @@ public class Bot {
 
     public void start() {
         TelegramBotService.setMenuCommands(telegramBot);
-        telegramBot.setUpdatesListener(list -> {
-            for (var elem : list) {
+        telegramBot.setUpdatesListener(updates -> {
+            for (var elem : updates) {
                 var res = ProcessorHolder.PROCESSOR.process(elem);
                 var id = elem.message().chat().id();
                 SendMessage request = new SendMessage(id, res);
