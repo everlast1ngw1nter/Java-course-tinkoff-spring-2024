@@ -49,13 +49,6 @@
             <artifactId>java-telegram-bot-api</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
-        <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambots</artifactId>
-            <version>6.9.7.0</version>
-        </dependency>
-
         <!-- Dev Tools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -89,10 +82,16 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.wiremock</groupId>
-            <artifactId>wiremock</artifactId>
+            <artifactId>wiremock-standalone</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

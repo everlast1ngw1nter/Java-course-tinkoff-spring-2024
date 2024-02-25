@@ -1,5 +1,8 @@
 package edu.java.clients.stackoverflow;
 
-public record Owner (
-    long account_id,
-    String link) { }
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record Owner(
+        @JsonProperty("account_id")
+        Long accountId,
+        String link) { }

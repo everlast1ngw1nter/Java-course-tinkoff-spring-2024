@@ -1,7 +1,5 @@
 package edu.java;
 
-import edu.java.clients.github.GithubWebClient;
-import edu.java.clients.stackoverflow.StackOverflowWebClient;
 import edu.java.configuration.ApplicationConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -2,7 +2,7 @@ package edu.java.clients.stackoverflow;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record Item (
+public record Item(
     Owner owner,
     @JsonProperty("is_answered")
     boolean isAnswered,
