@@ -146,7 +146,6 @@ public class GithubClientTest {
                                 .withStatus(200)
                                 .withHeader("Content-Type", "application/json")
                                 .withBody(BODY)));
-        //Это проходит локально, но падает на гите
         var resp = client.fetchRepo("everlast1ngw1nter", "Java-course-tinkoff-autumn-2023")
                 .block();
         assertThat(resp.id())
