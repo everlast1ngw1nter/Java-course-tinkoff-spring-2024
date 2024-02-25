@@ -15,8 +15,6 @@ public class StackOverflowClientTest {
     private StackOverflowWebClient client;
     private WireMockServer wireMockServer;
 
-    private static final int PORT = 8029;
-
     private static final String BODY = """
             {
                 "items": [
@@ -55,7 +53,7 @@ public class StackOverflowClientTest {
 
     @BeforeEach
     void prep() {
-        wireMockServer = new WireMockServer(PORT);
+        wireMockServer = new WireMockServer();
         wireMockServer.start();
         configureFor("localhost", wireMockServer.port());
         client = new StackOverflowWebClient(
