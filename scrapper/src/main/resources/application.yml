@@ -1,7 +1,7 @@
 app:
   scheduler:
     enable: true
-    interval: 10s
+    interval: 5
     force-check-delay: 10s
   githubBaseUrl: https://api.github.com/repos
   stackoverflowBaseUrl: https://api.stackexchange.com/2.3/questions
