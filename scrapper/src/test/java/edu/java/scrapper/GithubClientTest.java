@@ -127,7 +127,6 @@ public class GithubClientTest {
     void prep(){
         wireMockServer = new WireMockServer();
         wireMockServer.start();
-        configureFor("localhost", wireMockServer.port());
         client = new GithubWebClient(
                 WebClient
                         .builder()
