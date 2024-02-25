@@ -131,7 +131,7 @@ public class GithubClientTest {
         client = new GithubWebClient(
                 WebClient
                         .builder()
-                        .baseUrl("http://localhost:" + wireMockServer.port() + "/repos")
+                        .baseUrl(wireMockServer.baseUrl() + "/repos")
                         .build());
     }
 
