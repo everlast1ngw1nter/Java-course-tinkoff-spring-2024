@@ -15,6 +15,8 @@ public class GithubClientTest {
     private GithubWebClient client;
     private WireMockServer wireMockServer;
 
+    private static final int PORT = 8029;
+
     private static final String BODY = """
             {
                 "id": 701823037,
@@ -123,7 +125,7 @@ public class GithubClientTest {
 
     @BeforeEach
     void prep(){
-        wireMockServer = new WireMockServer();
+        wireMockServer = new WireMockServer(8029);
         wireMockServer.start();
         configureFor("localhost", wireMockServer.port());
         client = new GithubWebClient(
