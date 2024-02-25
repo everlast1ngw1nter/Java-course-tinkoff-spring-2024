@@ -11,10 +11,10 @@ public class StackOverflowWebClient {
 
     private final WebClient stackOverflowClient;
 
-    public Mono<ItemsList> fetchQuestion(String name) {
+    public Mono<ItemsList> fetchQuestion(Long id) {
         return stackOverflowClient
                 .get()
-                .uri("/{name}/?site=stackoverflow", name)
+                .uri("/{id}/?site=stackoverflow", id)
                 .retrieve()
                 .bodyToMono(ItemsList.class);
     }
