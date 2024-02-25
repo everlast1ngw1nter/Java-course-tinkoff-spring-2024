@@ -73,7 +73,7 @@ public class StackOverflowClientTest {
                                 .withHeader("Content-Type", "application/json")
                                 .withBody(BODY))
         );
-        //Это почему-то падает...
+        //Это падает везде
 //        var resp = client.fetchQuestion(33906873L).block();
 //
 //        assertThat(resp.items().size())
