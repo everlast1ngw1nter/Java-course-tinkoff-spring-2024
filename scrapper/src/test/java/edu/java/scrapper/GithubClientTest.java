@@ -1,7 +1,6 @@
 package edu.java.scrapper;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import edu.java.clients.github.GithubWebClient;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,9 +10,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@WireMockTest(httpPort = 8029)
 public class GithubClientTest {
 
+    private static final int PORT = 8029;
     private GithubWebClient client;
     private WireMockServer wireMockServer;
 
@@ -125,8 +124,9 @@ public class GithubClientTest {
 
     @BeforeEach
     void prep(){
-        wireMockServer = new WireMockServer();
+        wireMockServer = new WireMockServer(PORT);
         wireMockServer.start();
+        configureFor("localhost", wireMockServer.port());
         client = new GithubWebClient(
                 WebClient
                         .builder()
