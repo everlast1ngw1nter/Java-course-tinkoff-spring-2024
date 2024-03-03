@@ -1,6 +1,5 @@
 package edu.java.models.exceptions;
 
-
 public class AlreadyExistException extends RuntimeException {
     public final String description;
 
