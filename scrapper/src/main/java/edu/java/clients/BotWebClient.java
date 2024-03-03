@@ -1,5 +1,6 @@
 package edu.java.clients;
 
+import edu.java.models.requests.LinkUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -9,4 +10,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class BotWebClient {
 
     private final WebClient botClient;
+
+    public void sendUpdates(LinkUpdateRequest linkUpdateRequest) {
+
+    }
 }

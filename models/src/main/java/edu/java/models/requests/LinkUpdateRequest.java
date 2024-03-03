@@ -1,4 +1,4 @@
-package edu.java.bot.requests;
+package edu.java.models.requests;
 
 import java.util.List;
 
