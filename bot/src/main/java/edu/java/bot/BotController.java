@@ -1,6 +1,6 @@
 package edu.java.bot;
 
-import edu.java.bot.requests.LinkUpdateRequest;
+import edu.java.models.requests.LinkUpdateRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;

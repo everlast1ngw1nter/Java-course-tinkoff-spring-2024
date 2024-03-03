@@ -1,9 +1,9 @@
 package edu.java;
 
-import edu.java.requests.AddLinkRequest;
-import edu.java.requests.RemoveLinkRequest;
-import edu.java.responses.LinkResponse;
-import edu.java.responses.ListLinksResponse;
+import edu.java.models.requests.AddLinkRequest;
+import edu.java.models.requests.RemoveLinkRequest;
+import edu.java.models.responses.LinkResponse;
+import edu.java.models.responses.ListLinksResponse;
 import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
