@@ -1,7 +1,5 @@
 package edu.java.models.exceptions;
 
-import edu.java.models.responses.ApiErrorResponse;
-
 public class NotExistException extends RuntimeException {
     public final String description;
 

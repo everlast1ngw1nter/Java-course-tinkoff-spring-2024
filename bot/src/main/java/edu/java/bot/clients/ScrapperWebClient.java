@@ -16,12 +16,14 @@ public class ScrapperWebClient {
 
     private final WebClient scrapperClient;
 
+    private static final String CHAT_PATH = "/tg-chat/";
+
     private static final String LINKS_PATH = "/links";
 
     private static final String TG_CHAT_HEADER = "Tg-Chat-Id";
 
     public String registerChat(long id) {
-        var uri = "/tg-chat/" + id;
+        var uri = CHAT_PATH + id;
         return scrapperClient
                 .post()
                 .uri(uri)
@@ -31,7 +33,7 @@ public class ScrapperWebClient {
     }
 
     public String deleteChat(long id) {
-        var uri = "/tg-chat/" + id;
+        var uri = CHAT_PATH + id;
         return scrapperClient
                 .delete()
                 .uri(uri)
