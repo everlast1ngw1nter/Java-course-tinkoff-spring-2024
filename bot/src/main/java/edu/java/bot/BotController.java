@@ -1,6 +1,6 @@
 package edu.java.bot;
 
-import edu.java.bot.responces.LinkUpdate;
+import edu.java.bot.requests.LinkUpdateRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +14,7 @@ public class BotController {
     private final static Logger LOGGER = LogManager.getLogger();
 
     @PostMapping("/updates")
-    LinkUpdate getUpdate(@RequestBody LinkUpdate updateBody) {
+    LinkUpdateRequest getUpdate(@RequestBody LinkUpdateRequest updateBody) {
         LOGGER.info(updateBody.toString());
         return updateBody;
     }

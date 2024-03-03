@@ -1,4 +1,4 @@
-package edu.java.responses;
+package edu.java.bot.responces;
 
 import java.util.List;
 
