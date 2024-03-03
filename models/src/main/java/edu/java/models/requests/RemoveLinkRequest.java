@@ -1,4 +1,6 @@
 package edu.java.models.requests;
 
-public record RemoveLinkRequest(String link) {
+import java.net.URI;
+
+public record RemoveLinkRequest(URI link) {
 }

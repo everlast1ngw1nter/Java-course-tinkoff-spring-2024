@@ -1,4 +1,6 @@
 package edu.java.models.requests;
 
-public record AddLinkRequest(String link) {
+import java.net.URI;
+
+public record AddLinkRequest(URI link) {
 }
