@@ -1,4 +1,4 @@
-package edu.java.bot;
+package edu.java.bot.controllers;
 
 import edu.java.models.requests.LinkUpdateRequest;
 import org.apache.logging.log4j.LogManager;

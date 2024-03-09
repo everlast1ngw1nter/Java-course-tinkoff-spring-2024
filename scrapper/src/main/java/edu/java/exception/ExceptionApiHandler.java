@@ -1,9 +1,9 @@
-package edu.java;
+package edu.java.exception;
 
 import edu.java.models.exceptions.AlreadyExistException;
 import edu.java.models.exceptions.NotExistException;
 import edu.java.models.responses.ApiErrorResponse;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionApiHandler {
 
-    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(AlreadyExistException.class)
     public ApiErrorResponse handleAlreadyExistException(AlreadyExistException exception) {
         return new ApiErrorResponse(
@@ -38,10 +38,8 @@ public class ExceptionApiHandler {
     }
 
     private static List<String> convertStackTraceToList(StackTraceElement[] stackTrace) {
-        var stackTraceList = new ArrayList<String>();
-        for (var elem : stackTrace) {
-            stackTraceList.add(elem.toString());
-        }
-        return stackTraceList;
+        return Arrays.stream(stackTrace)
+                .map(StackTraceElement::toString)
+                .toList();
     }
 }
