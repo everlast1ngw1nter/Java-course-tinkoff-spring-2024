@@ -16,8 +16,8 @@ public class MigrationsIntegrationTest extends IntegrationTest {
                 .build();
         var jdbcTemplate = new JdbcTemplate(dataSource);
         var chatId = 424242L;
-        jdbcTemplate.update("INSERT INTO scrapper.public.chat (chat_id) VALUES (?)", chatId);
-        var actualChatId = jdbcTemplate.queryForObject("SELECT chat_id FROM scrapper.public.chat WHERE chat_id = ?", Long.class, chatId);
+        jdbcTemplate.update("INSERT INTO scrapper.public.chat (id) VALUES (?)", chatId);
+        var actualChatId = jdbcTemplate.queryForObject("SELECT id FROM scrapper.public.chat WHERE id = ?", Long.class, chatId);
         assertThat(actualChatId).isEqualTo(chatId);
     }
 }

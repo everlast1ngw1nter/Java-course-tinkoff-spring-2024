@@ -8,6 +8,6 @@
        http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="init_tables" author="everlast1ngw1nter">
         <validCheckSum>9:d0b4726ee425ae305458a749a9b67acf</validCheckSum>
-        <sqlFile path="sql/schemes.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="sql/schemes-1.sql" relativeToChangelogFile="true"/>
     </changeSet>
 </databaseChangeLog>
