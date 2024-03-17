@@ -37,6 +37,12 @@ public class JdbcLinkService implements LinkService {
         return convertToListLinkResponse(allLinksById);
     }
 
+    @Override
+    public ListLinksResponse listAllStale() {
+        var allStaleLinks = LinkDao.findAllStaleLinks(jdbcTemplateScrapper);
+        return convertToListLinkResponse(allStaleLinks);
+    }
+
     private ListLinksResponse convertToListLinkResponse(List<LinkDto> linksDto) {
         var linksResponse = linksDto
                 .stream()

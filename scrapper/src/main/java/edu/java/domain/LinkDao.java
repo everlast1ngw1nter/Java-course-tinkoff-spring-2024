@@ -1,5 +1,6 @@
 package edu.java.domain;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +10,8 @@ public class LinkDao {
 
     private LinkDao() {
     }
+
+    private static final long fiveMinutes = 5 * 60 * 1000;
 
 
     public static void add(JdbcTemplate jdbcTemplate, LinkDto linkDto) {
@@ -27,6 +30,13 @@ public class LinkDao {
     public static List<LinkDto> findAll(JdbcTemplate jdbcTemplate, long chatId) {
         var rowSet = jdbcTemplate.queryForRowSet(
                 "SELECT * FROM scrapper.public.link WHERE chat_id = (?)", chatId);
+        return convertToDto(rowSet);
+    }
+
+    public static List<LinkDto> findAllStaleLinks(JdbcTemplate jdbcTemplate) {
+        var staleTime = new Timestamp(System.currentTimeMillis() - fiveMinutes);
+        var rowSet = jdbcTemplate.queryForRowSet(
+                "SELECT * FROM scrapper.public.link WHERE last_check_time < ?", staleTime);
         return convertToDto(rowSet);
     }
 
