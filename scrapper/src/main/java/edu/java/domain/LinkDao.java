@@ -11,7 +11,7 @@ public class LinkDao {
     private LinkDao() {
     }
 
-    private static final long fiveMinutes = 5 * 60 * 1000;
+    private static final long FIVE_MINUTES = 5 * 60 * 1000;
 
 
     public static void add(JdbcTemplate jdbcTemplate, LinkDto linkDto) {
@@ -34,7 +34,7 @@ public class LinkDao {
     }
 
     public static List<LinkDto> findAllStaleLinks(JdbcTemplate jdbcTemplate) {
-        var staleTime = new Timestamp(System.currentTimeMillis() - fiveMinutes);
+        var staleTime = new Timestamp(System.currentTimeMillis() - FIVE_MINUTES);
         var rowSet = jdbcTemplate.queryForRowSet(
                 "SELECT * FROM scrapper.public.link WHERE last_check_time < ?", staleTime);
         return convertToDto(rowSet);

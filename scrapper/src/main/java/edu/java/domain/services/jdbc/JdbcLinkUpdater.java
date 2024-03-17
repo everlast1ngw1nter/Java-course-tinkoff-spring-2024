@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class JdbcLinkUpdater implements LinkUpdater {
 
     private final JdbcTemplate jdbcTemplateScrapper;
+
     @Override
     public int update() {
         return 0;

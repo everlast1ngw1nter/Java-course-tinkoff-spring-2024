@@ -33,6 +33,8 @@ public class LinkUpdaterScheduler {
 
     private final LinkService jdbcLinkService;
 
+    private final static int FIVE_MINUTES = 5;
+
     private final static Logger LOGGER = LogManager.getLogger();
 
     @Scheduled(fixedDelayString = "#{new Integer(${app.scheduler.interval}) * 1000}")
@@ -70,6 +72,6 @@ public class LinkUpdaterScheduler {
     private boolean checkLessFiveMinutes(OffsetDateTime lastCheckTime) {
         var currentDateTime = OffsetDateTime.now();
         long diffInMinutes = currentDateTime.until(lastCheckTime, ChronoUnit.MINUTES);
-        return diffInMinutes < 5;
+        return diffInMinutes < FIVE_MINUTES;
     }
 }

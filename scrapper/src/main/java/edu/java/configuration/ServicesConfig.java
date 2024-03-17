@@ -6,13 +6,13 @@ import edu.java.domain.services.jdbc.JdbcTgChatService;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.postgresql.ds.PGSimpleDataSource;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 @RequiredArgsConstructor
+@SuppressWarnings("MultipleStringLiterals")
 public class ServicesConfig {
 
     @Bean
