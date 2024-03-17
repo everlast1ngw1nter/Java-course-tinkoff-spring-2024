@@ -46,7 +46,7 @@ public class JdbcLinkService implements LinkService {
     private ListLinksResponse convertToListLinkResponse(List<LinkDto> linksDto) {
         var linksResponse = linksDto
                 .stream()
-                .map(link -> new LinkResponse(link.id(), URI.create(link.url())))
+                .map(link -> new LinkResponse(link.id(), URI.create(link.url()), link.chatId()))
                 .toList();
         return new ListLinksResponse(linksResponse, linksResponse.size());
     }

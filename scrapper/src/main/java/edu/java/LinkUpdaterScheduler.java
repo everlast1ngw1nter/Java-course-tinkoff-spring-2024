@@ -4,6 +4,7 @@ import edu.java.clients.BotWebClient;
 import edu.java.clients.github.GithubWebClient;
 import edu.java.clients.stackoverflow.StackOverflowWebClient;
 import edu.java.domain.services.LinkService;
+import edu.java.models.requests.LinkUpdateRequest;
 import edu.java.models.responses.LinkResponse;
 import java.time.Instant;
 import java.time.OffsetDateTime;
@@ -40,7 +41,8 @@ public class LinkUpdaterScheduler {
         var staleLinks = jdbcLinkService.listAllStale();
         for (var link : staleLinks.links()) {
             if (isUpdated(link)) {
-                botClient.sendUpdates()
+                botClient.sendUpdates(new LinkUpdateRequest(link.id(), link.url(),
+                        "По данной ссылке вышло обновление", link.chatId()));
             }
         }
     }

@@ -36,22 +36,22 @@ public class ScrapperController {
     }
 
     @GetMapping("/links")
-    ListLinksResponse getLinks(@RequestHeader("Tg-Chat-Id") int tgChatId) {
+    ListLinksResponse getLinks(@RequestHeader("Tg-Chat-Id") long tgChatId) {
         LOGGER.info("get links by " + tgChatId);
         return jdbcLinkService.listAll(tgChatId);
     }
 
     @PostMapping("/links")
-    LinkResponse addLink(@RequestHeader("Tg-Chat-Id") int tgChatId, @RequestBody AddLinkRequest linkRequest) {
+    LinkResponse addLink(@RequestHeader("Tg-Chat-Id") long tgChatId, @RequestBody AddLinkRequest linkRequest) {
         LOGGER.info("add link " + linkRequest.link() + " by " + tgChatId);
         jdbcLinkService.add(tgChatId, linkRequest.link());
-        return new LinkResponse(tgChatId, linkRequest.link());
+        return new LinkResponse(tgChatId, linkRequest.link(), tgChatId);
     }
 
     @DeleteMapping("/links")
-    LinkResponse removeLink(@RequestHeader("Tg-Chat-Id") int tgChatId, @RequestBody RemoveLinkRequest linkRequest) {
+    LinkResponse removeLink(@RequestHeader("Tg-Chat-Id") long tgChatId, @RequestBody RemoveLinkRequest linkRequest) {
         LOGGER.info("remove link " + linkRequest.link() + " by " + tgChatId);
         jdbcLinkService.remove(tgChatId, linkRequest.link());
-        return new LinkResponse(tgChatId, linkRequest.link());
+        return new LinkResponse(tgChatId, linkRequest.link(), tgChatId);
     }
 }
