@@ -20,14 +20,13 @@ public class LinkDao {
                 linkDto.lastCheckTime(), linkDto.chatId());
     }
 
-    public static void delete(JdbcTemplate jdbcTemplate, long linkId) {
-        jdbcTemplate.update("DELETE FROM scrapper.public.link WHERE id = (?)", linkId);
+    public static void delete(JdbcTemplate jdbcTemplate, long linkId, long chatId) {
+        jdbcTemplate.update("DELETE FROM scrapper.public.link WHERE id = (?) AND chat_id = (?)", linkId, chatId);
     }
 
-    public static List<LinkDto> findAll(JdbcTemplate jdbcTemplate) {
+    public static List<LinkDto> findAll(JdbcTemplate jdbcTemplate, long chatId) {
         var rowSet = jdbcTemplate.queryForRowSet(
-                "SELECT *"
-                        + "FROM scrapper.public.link");
+                "SELECT * FROM scrapper.public.link WHERE chat_id = (?)", chatId);
         return convertToDto(rowSet);
     }
 

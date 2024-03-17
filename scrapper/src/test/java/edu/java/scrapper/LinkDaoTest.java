@@ -29,11 +29,11 @@ public class LinkDaoTest extends IntegrationTest{
         var lastCheckTime = new Timestamp(80000);
         var linkData = new LinkDto(linkId, url, lastUpdate, lastCheckTime, chatId);
         LinkDao.add(jdbcTemplate, linkData);
-        var setAdded = LinkDao.findAll(jdbcTemplate);
+        var setAdded = LinkDao.findAll(jdbcTemplate, chatId);
         assertEquals(1, setAdded.size());
         assertEquals(linkData, setAdded.get(0));
-        LinkDao.delete(jdbcTemplate, linkId);
-        var setRemoved = LinkDao.findAll(jdbcTemplate);
+        LinkDao.delete(jdbcTemplate, linkId, chatId);
+        var setRemoved = LinkDao.findAll(jdbcTemplate, chatId);
         assertTrue(setRemoved.isEmpty());
     }
 }
