@@ -7,12 +7,16 @@ import java.sql.Timestamp;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkDaoTest extends IntegrationTest{
 
     @Test
+    @Transactional
+    @Rollback
     public void linkDaoFunctionsTest() {
         var dataSource = DataSourceBuilder.create()
                 .url(POSTGRES.getJdbcUrl())
@@ -35,5 +39,6 @@ public class LinkDaoTest extends IntegrationTest{
         LinkDao.delete(jdbcTemplate, linkId, chatId);
         var setRemoved = LinkDao.findAll(jdbcTemplate, chatId);
         assertTrue(setRemoved.isEmpty());
+        ChatDao.delete(jdbcTemplate, 55L);
     }
 }
