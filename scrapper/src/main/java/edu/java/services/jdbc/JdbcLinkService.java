@@ -43,6 +43,7 @@ public class JdbcLinkService implements LinkService {
     @Override
     public ListLinksResponse listAllStale() {
         var allStaleLinks = linkDao.findAllStaleLinks();
+        updateCheckTime(allStaleLinks);
         return convertToListLinkResponse(allStaleLinks);
     }
 
@@ -52,5 +53,11 @@ public class JdbcLinkService implements LinkService {
                 .map(link -> new LinkResponse(link.id(), URI.create(link.url()), link.chatId()))
                 .toList();
         return new ListLinksResponse(linksResponse, linksResponse.size());
+    }
+
+    private void updateCheckTime(List<LinkDto> staleLinks) {
+        for (var link : staleLinks) {
+            linkDao.updateCheckTime(link.id());
+        }
     }
 }

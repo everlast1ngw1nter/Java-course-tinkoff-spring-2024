@@ -39,8 +39,16 @@ public class LinkDao {
     public List<LinkDto> findAllStaleLinks() {
         var staleTime = new Timestamp(System.currentTimeMillis() - LINK_REFRESH_TIME);
         var rowSet = jdbcTemplate.queryForRowSet(
-                "SELECT * FROM scrapper.public.link WHERE last_check_time < ?", staleTime);
+                "SELECT * FROM scrapper.public.link WHERE last_check_time < (?)", staleTime);
         return convertToDto(rowSet);
+    }
+
+    public void updateCheckTime(long linkId) {
+        jdbcTemplate.update(
+                "UPDATE link " +
+                        "SET last_check_time = CURRENT_TIMESTAMP " +
+                        "WHERE id = (?)", linkId
+        );
     }
 
     private List<LinkDto> convertToDto(SqlRowSet rowSet) {
