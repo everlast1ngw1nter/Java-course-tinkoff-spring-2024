@@ -3,18 +3,21 @@ package edu.java.domain;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@RequiredArgsConstructor
 public class LinkDao {
 
-    private LinkDao() {
-    }
+    private final JdbcTemplate jdbcTemplate;
 
-    private static final long FIVE_MINUTES = 5 * 60 * 1000;
+    private static final long LINK_REFRESH_TIME = 5 * 60 * 1000;
 
 
-    public static void add(JdbcTemplate jdbcTemplate, LinkDto linkDto) {
+    public void add(LinkDto linkDto) {
         jdbcTemplate.update(
                 "INSERT INTO scrapper.public.link"
                         + "(id, url, last_update, last_check_time, chat_id)"
@@ -23,24 +26,24 @@ public class LinkDao {
                 linkDto.lastCheckTime(), linkDto.chatId());
     }
 
-    public static void delete(JdbcTemplate jdbcTemplate, long linkId, long chatId) {
+    public void delete(long linkId, long chatId) {
         jdbcTemplate.update("DELETE FROM scrapper.public.link WHERE id = (?) AND chat_id = (?)", linkId, chatId);
     }
 
-    public static List<LinkDto> findAll(JdbcTemplate jdbcTemplate, long chatId) {
+    public List<LinkDto> findAll(long chatId) {
         var rowSet = jdbcTemplate.queryForRowSet(
                 "SELECT * FROM scrapper.public.link WHERE chat_id = (?)", chatId);
         return convertToDto(rowSet);
     }
 
-    public static List<LinkDto> findAllStaleLinks(JdbcTemplate jdbcTemplate) {
-        var staleTime = new Timestamp(System.currentTimeMillis() - FIVE_MINUTES);
+    public List<LinkDto> findAllStaleLinks() {
+        var staleTime = new Timestamp(System.currentTimeMillis() - LINK_REFRESH_TIME);
         var rowSet = jdbcTemplate.queryForRowSet(
                 "SELECT * FROM scrapper.public.link WHERE last_check_time < ?", staleTime);
         return convertToDto(rowSet);
     }
 
-    private static List<LinkDto> convertToDto(SqlRowSet rowSet) {
+    private List<LinkDto> convertToDto(SqlRowSet rowSet) {
         var listDto = new ArrayList<LinkDto>();
         while (rowSet.next()) {
             listDto.add(new LinkDto(

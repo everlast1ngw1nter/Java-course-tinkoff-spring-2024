@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ChatDaoTest extends IntegrationTest{
+public class ChatDaoTest extends IntegrationTest {
+
     @Test
     @Transactional
     @Rollback
@@ -20,14 +21,15 @@ public class ChatDaoTest extends IntegrationTest{
                 .password(POSTGRES.getPassword())
                 .build();
         var jdbcTemplate = new JdbcTemplate(dataSource);
+        var chatDao = new ChatDao(jdbcTemplate);
         var chatId = 424242L;
 
-        ChatDao.add(jdbcTemplate, chatId);
-        var setAdded = ChatDao.findAll(jdbcTemplate);
+        chatDao.add(chatId);
+        var setAdded =  chatDao.findAll();
         assertEquals(1, setAdded.size());
         assertEquals(chatId, setAdded.get(0));
-        ChatDao.delete(jdbcTemplate, chatId);
-        var setRemoved = ChatDao.findAll(jdbcTemplate);
+        chatDao.delete(chatId);
+        var setRemoved = chatDao.findAll();
         assertTrue(setRemoved.isEmpty());
     }
 }

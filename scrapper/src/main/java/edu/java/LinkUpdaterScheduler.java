@@ -33,7 +33,7 @@ public class LinkUpdaterScheduler {
 
     private final LinkService jdbcLinkService;
 
-    private final static int FIVE_MINUTES = 5;
+    private final static int LINK_REFRESH_TIME = 5;
 
     private final static Logger LOGGER = LogManager.getLogger();
 
@@ -72,6 +72,6 @@ public class LinkUpdaterScheduler {
     private boolean checkLessFiveMinutes(OffsetDateTime lastCheckTime) {
         var currentDateTime = OffsetDateTime.now();
         long diffInMinutes = currentDateTime.until(lastCheckTime, ChronoUnit.MINUTES);
-        return diffInMinutes < FIVE_MINUTES;
+        return diffInMinutes < LINK_REFRESH_TIME;
     }
 }

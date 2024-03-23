@@ -9,7 +9,6 @@ import java.net.URI;
 import java.sql.Timestamp;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 
@@ -17,29 +16,29 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class JdbcLinkService implements LinkService {
 
-    private final JdbcTemplate jdbcTemplateScrapper;
+    private final LinkDao linkDao;
 
     @Override
     public void add(long tgChatId, URI url) {
         var currentTimestamp = new Timestamp(System.currentTimeMillis());
         var linkInfo = new LinkDto(url.hashCode(), url.toString(), currentTimestamp, currentTimestamp, tgChatId);
-        LinkDao.add(jdbcTemplateScrapper, linkInfo);
+        linkDao.add(linkInfo);
     }
 
     @Override
     public void remove(long tgChatId, URI url) {
-        LinkDao.delete(jdbcTemplateScrapper, url.hashCode(), tgChatId);
+        linkDao.delete(url.hashCode(), tgChatId);
     }
 
     @Override
     public ListLinksResponse listAll(long tgChatId) {
-        var allLinksById = LinkDao.findAll(jdbcTemplateScrapper, tgChatId);
+        var allLinksById = linkDao.findAll(tgChatId);
         return convertToListLinkResponse(allLinksById);
     }
 
     @Override
     public ListLinksResponse listAllStale() {
-        var allStaleLinks = LinkDao.findAllStaleLinks(jdbcTemplateScrapper);
+        var allStaleLinks = linkDao.findAllStaleLinks();
         return convertToListLinkResponse(allStaleLinks);
     }
 

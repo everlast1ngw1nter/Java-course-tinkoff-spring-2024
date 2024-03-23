@@ -24,21 +24,23 @@ public class LinkDaoTest extends IntegrationTest{
                 .password(POSTGRES.getPassword())
                 .build();
         var jdbcTemplate = new JdbcTemplate(dataSource);
+        var chatDao = new ChatDao(jdbcTemplate);
+        var linkDao = new LinkDao(jdbcTemplate);
         var chatId = 55L;
-        ChatDao.add(jdbcTemplate, chatId);
+        chatDao.add(chatId);
 
         var linkId = 123L;
         var url = "https://example.com";
         var lastUpdate = new Timestamp(12345);
         var lastCheckTime = new Timestamp(80000);
         var linkData = new LinkDto(linkId, url, lastUpdate, lastCheckTime, chatId);
-        LinkDao.add(jdbcTemplate, linkData);
-        var setAdded = LinkDao.findAll(jdbcTemplate, chatId);
+        linkDao.add(linkData);
+        var setAdded = linkDao.findAll(chatId);
         assertEquals(1, setAdded.size());
         assertEquals(linkData, setAdded.get(0));
-        LinkDao.delete(jdbcTemplate, linkId, chatId);
-        var setRemoved = LinkDao.findAll(jdbcTemplate, chatId);
+        linkDao.delete(linkId, chatId);
+        var setRemoved = linkDao.findAll(chatId);
         assertTrue(setRemoved.isEmpty());
-        ChatDao.delete(jdbcTemplate, 55L);
+        chatDao.delete(55L);
     }
 }
