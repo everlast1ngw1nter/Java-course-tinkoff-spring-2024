@@ -1,8 +1,8 @@
-package edu.java.domain.services.jdbc;
+package edu.java.services.jdbc;
 
 import edu.java.domain.LinkDao;
 import edu.java.domain.LinkDto;
-import edu.java.domain.services.LinkService;
+import edu.java.services.LinkService;
 import edu.java.models.responses.LinkResponse;
 import edu.java.models.responses.ListLinksResponse;
 import java.net.URI;

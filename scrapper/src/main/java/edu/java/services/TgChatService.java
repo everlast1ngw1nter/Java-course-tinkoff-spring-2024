@@ -1,4 +1,4 @@
-package edu.java.domain.services;
+package edu.java.services;
 
 public interface TgChatService {
     void register(long tgChatId);

@@ -3,7 +3,7 @@ package edu.java;
 import edu.java.clients.BotWebClient;
 import edu.java.clients.github.GithubWebClient;
 import edu.java.clients.stackoverflow.StackOverflowWebClient;
-import edu.java.domain.services.LinkService;
+import edu.java.services.LinkService;
 import edu.java.models.requests.LinkUpdateRequest;
 import edu.java.models.responses.LinkResponse;
 import java.time.Instant;

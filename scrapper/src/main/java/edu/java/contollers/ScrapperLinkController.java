@@ -1,6 +1,6 @@
 package edu.java.contollers;
 
-import edu.java.domain.services.LinkService;
+import edu.java.services.LinkService;
 import edu.java.models.requests.AddLinkRequest;
 import edu.java.models.requests.RemoveLinkRequest;
 import edu.java.models.responses.LinkResponse;

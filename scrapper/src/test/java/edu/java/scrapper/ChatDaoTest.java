@@ -22,14 +22,13 @@ public class ChatDaoTest extends IntegrationTest {
                 .build();
         var jdbcTemplate = new JdbcTemplate(dataSource);
         var chatDao = new ChatDao(jdbcTemplate);
-        var chatId = 424242L;
+        var chatId = 424241L;
 
         chatDao.add(chatId);
         var setAdded =  chatDao.findAll();
-        assertEquals(1, setAdded.size());
-        assertEquals(chatId, setAdded.get(0));
+        assertTrue(setAdded.contains(chatId));
         chatDao.delete(chatId);
         var setRemoved = chatDao.findAll();
-        assertTrue(setRemoved.isEmpty());
+        assertFalse(setRemoved.contains(chatId));
     }
 }

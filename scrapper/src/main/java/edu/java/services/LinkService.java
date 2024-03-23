@@ -1,4 +1,4 @@
-package edu.java.domain.services;
+package edu.java.services;
 
 import edu.java.models.responses.ListLinksResponse;
 import java.net.URI;
