@@ -20,19 +20,19 @@ public class LinkDao {
     public void add(LinkDto linkDto) {
         jdbcTemplate.update(
                 "INSERT INTO scrapper.public.link"
-                        + "(id, url, last_update, last_check_time, chat_id)"
-                        + "VALUES (?, ?, ?, ?, ?)",
+                        + "(id, url, last_update, last_check_time)"
+                        + "VALUES (?, ?, ?, ?)",
                 linkDto.id(), linkDto.url(), linkDto.lastUpdate(),
-                linkDto.lastCheckTime(), linkDto.chatId());
-    }
-
-    public void delete(long linkId, long chatId) {
-        jdbcTemplate.update("DELETE FROM scrapper.public.link WHERE id = (?) AND chat_id = (?)", linkId, chatId);
+                linkDto.lastCheckTime());
     }
 
     public List<LinkDto> findAll(long chatId) {
         var rowSet = jdbcTemplate.queryForRowSet(
-                "SELECT * FROM scrapper.public.link WHERE chat_id = (?)", chatId);
+                "SELECT * " +
+                        "FROM chat " +
+                        "JOIN chat_link ON chat.id = chat_link.chat_id " +
+                        "JOIN link ON chat_link.link_id = link.id " +
+                        "WHERE chat_id = (?)", chatId);
         return convertToDto(rowSet);
     }
 
@@ -47,7 +47,7 @@ public class LinkDao {
         var listDto = new ArrayList<LinkDto>();
         while (rowSet.next()) {
             listDto.add(new LinkDto(
-                    rowSet.getLong("id"),
+                    rowSet.getLong("link_id"),
                     rowSet.getString("url"),
                     rowSet.getTimestamp("last_update"),
                     rowSet.getTimestamp("last_check_time"),

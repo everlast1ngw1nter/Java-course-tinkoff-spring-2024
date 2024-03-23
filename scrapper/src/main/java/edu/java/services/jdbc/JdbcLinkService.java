@@ -1,5 +1,6 @@
 package edu.java.services.jdbc;
 
+import edu.java.domain.ChatLinkDao;
 import edu.java.domain.LinkDao;
 import edu.java.domain.LinkDto;
 import edu.java.services.LinkService;
@@ -18,16 +19,19 @@ public class JdbcLinkService implements LinkService {
 
     private final LinkDao linkDao;
 
+    private final ChatLinkDao chatLinkDao;
+
     @Override
     public void add(long tgChatId, URI url) {
         var currentTimestamp = new Timestamp(System.currentTimeMillis());
         var linkInfo = new LinkDto(url.hashCode(), url.toString(), currentTimestamp, currentTimestamp, tgChatId);
         linkDao.add(linkInfo);
+        chatLinkDao.update(url.hashCode(), tgChatId);
     }
 
     @Override
     public void remove(long tgChatId, URI url) {
-        linkDao.delete(url.hashCode(), tgChatId);
+        chatLinkDao.delete(url.hashCode(), tgChatId);
     }
 
     @Override

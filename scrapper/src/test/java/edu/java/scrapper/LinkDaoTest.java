@@ -1,6 +1,7 @@
 package edu.java.scrapper;
 
 import edu.java.domain.ChatDao;
+import edu.java.domain.ChatLinkDao;
 import edu.java.domain.LinkDao;
 import edu.java.domain.LinkDto;
 import java.sql.Timestamp;
@@ -26,6 +27,7 @@ public class LinkDaoTest extends IntegrationTest{
         var jdbcTemplate = new JdbcTemplate(dataSource);
         var chatDao = new ChatDao(jdbcTemplate);
         var linkDao = new LinkDao(jdbcTemplate);
+        var chatLinkDao = new ChatLinkDao(jdbcTemplate);
         var chatId = 55L;
         chatDao.add(chatId);
 
@@ -35,10 +37,11 @@ public class LinkDaoTest extends IntegrationTest{
         var lastCheckTime = new Timestamp(80000);
         var linkData = new LinkDto(linkId, url, lastUpdate, lastCheckTime, chatId);
         linkDao.add(linkData);
+        chatLinkDao.update(linkId, chatId);
         var setAdded = linkDao.findAll(chatId);
         assertEquals(1, setAdded.size());
         assertEquals(linkData, setAdded.get(0));
-        linkDao.delete(linkId, chatId);
+        chatLinkDao.delete(linkId, chatId);
         var setRemoved = linkDao.findAll(chatId);
         assertTrue(setRemoved.isEmpty());
         chatDao.delete(55L);
