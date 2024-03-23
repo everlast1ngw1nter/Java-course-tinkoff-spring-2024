@@ -11,7 +11,8 @@ public class ChatLinkDao {
     private final JdbcTemplate jdbcTemplate;
 
     public void delete(long linkId, long chatId) {
-        jdbcTemplate.update("DELETE FROM scrapper.public.chat_link WHERE link_id = (?) AND chat_id = (?)", linkId, chatId);
+        jdbcTemplate.update("DELETE FROM scrapper.public.chat_link "
+                + "WHERE link_id = (?) AND chat_id = (?)", linkId, chatId);
     }
 
     public void update(long linkId, long chatId) {

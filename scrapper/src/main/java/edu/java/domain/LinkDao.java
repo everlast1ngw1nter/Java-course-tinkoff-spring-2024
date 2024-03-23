@@ -28,11 +28,11 @@ public class LinkDao {
 
     public List<LinkDto> findAll(long chatId) {
         var rowSet = jdbcTemplate.queryForRowSet(
-                "SELECT * " +
-                        "FROM chat " +
-                        "JOIN chat_link ON chat.id = chat_link.chat_id " +
-                        "JOIN link ON chat_link.link_id = link.id " +
-                        "WHERE chat_id = (?)", chatId);
+                "SELECT * "
+                        + "FROM chat "
+                        + "JOIN chat_link ON chat.id = chat_link.chat_id "
+                        + "JOIN link ON chat_link.link_id = link.id "
+                        + "WHERE chat_id = (?)", chatId);
         return convertToDto(rowSet);
     }
 
@@ -45,9 +45,9 @@ public class LinkDao {
 
     public void updateCheckTime(long linkId) {
         jdbcTemplate.update(
-                "UPDATE link " +
-                        "SET last_check_time = CURRENT_TIMESTAMP " +
-                        "WHERE id = (?)", linkId
+                "UPDATE link "
+                        + "SET last_check_time = CURRENT_TIMESTAMP "
+                        + "WHERE id = (?)", linkId
         );
     }
 
