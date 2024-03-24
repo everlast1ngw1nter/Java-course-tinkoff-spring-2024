@@ -1,8 +1,8 @@
 package edu.java.scrapper.jdbc;
 
-import edu.java.domain.jdbcdao.ChatDao;
-import edu.java.domain.jdbcdao.ChatLinkDao;
-import edu.java.domain.jdbcdao.LinkDao;
+import edu.java.domain.jdbcdao.JdbcChatDao;
+import edu.java.domain.jdbcdao.JdbcChatLinkDao;
+import edu.java.domain.jdbcdao.JdbcLinkDao;
 import edu.java.domain.LinkDto;
 import edu.java.scrapper.IntegrationTest;
 import java.sql.Timestamp;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LinkDaoTest extends IntegrationTest {
+public class JdbcLinkDaoTest extends IntegrationTest {
 
     @Test
     @Transactional
@@ -26,9 +26,9 @@ public class LinkDaoTest extends IntegrationTest {
                 .password(POSTGRES.getPassword())
                 .build();
         var jdbcTemplate = new JdbcTemplate(dataSource);
-        var chatDao = new ChatDao(jdbcTemplate);
-        var linkDao = new LinkDao(jdbcTemplate);
-        var chatLinkDao = new ChatLinkDao(jdbcTemplate);
+        var chatDao = new JdbcChatDao(jdbcTemplate);
+        var linkDao = new JdbcLinkDao(jdbcTemplate);
+        var chatLinkDao = new JdbcChatLinkDao(jdbcTemplate);
         var chatId = 55L;
         chatDao.add(chatId);
 

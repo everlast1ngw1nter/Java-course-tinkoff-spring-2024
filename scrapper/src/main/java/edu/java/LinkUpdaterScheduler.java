@@ -31,7 +31,7 @@ public class LinkUpdaterScheduler {
 
     private final BotWebClient botClient;
 
-    private final LinkService jdbcLinkService;
+    private final LinkService linkService;
 
     private final static int LINK_REFRESH_TIME = 5;
 
@@ -40,7 +40,7 @@ public class LinkUpdaterScheduler {
     @Scheduled(fixedDelayString = "#{new Integer(${app.scheduler.interval}) * 1000}")
     public void update() {
         LOGGER.info("update was called");
-        var staleLinks = jdbcLinkService.listAllStale();
+        var staleLinks = linkService.listAllStale();
         for (var link : staleLinks.links()) {
             if (isUpdated(link)) {
                 botClient.sendUpdates(new LinkUpdateRequest(link.id(), link.url(),

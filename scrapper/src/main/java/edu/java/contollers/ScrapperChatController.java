@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ScrapperChatController {
 
-    private final TgChatService jdbcTgChatService;
+    private final TgChatService tgChatService;
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @PostMapping("/tg-chat/{id}")
     void registerChat(@PathVariable Long id) {
         LOGGER.info("register chat by " + id);
-        jdbcTgChatService.register(id);
+        tgChatService.register(id);
     }
 
     @DeleteMapping("/tg-chat/{id}")
     void deleteChat(@PathVariable Long id) {
         LOGGER.info("delete chat by " + id);
-        jdbcTgChatService.unregister(id);
+        tgChatService.unregister(id);
     }
 }

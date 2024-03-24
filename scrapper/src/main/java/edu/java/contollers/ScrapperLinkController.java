@@ -21,27 +21,27 @@ import org.springframework.web.bind.annotation.RestController;
 @SuppressWarnings("MultipleStringLiterals")
 public class ScrapperLinkController {
 
-    private final LinkService jdbcLinkService;
+    private final LinkService linkService;
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @GetMapping("/links")
     ListLinksResponse getLinks(@RequestHeader("Tg-Chat-Id") long tgChatId) {
         LOGGER.info("get links by " + tgChatId);
-        return jdbcLinkService.listAll(tgChatId);
+        return linkService.listAll(tgChatId);
     }
 
     @PostMapping("/links")
     LinkResponse addLink(@RequestHeader("Tg-Chat-Id") long tgChatId, @RequestBody AddLinkRequest linkRequest) {
         LOGGER.info("add link " + linkRequest.link() + " by " + tgChatId);
-        jdbcLinkService.add(tgChatId, linkRequest.link());
+        linkService.add(tgChatId, linkRequest.link());
         return new LinkResponse(tgChatId, linkRequest.link(), tgChatId);
     }
 
     @DeleteMapping("/links")
     LinkResponse removeLink(@RequestHeader("Tg-Chat-Id") long tgChatId, @RequestBody RemoveLinkRequest linkRequest) {
         LOGGER.info("remove link " + linkRequest.link() + " by " + tgChatId);
-        jdbcLinkService.remove(tgChatId, linkRequest.link());
+        linkService.remove(tgChatId, linkRequest.link());
         return new LinkResponse(tgChatId, linkRequest.link(), tgChatId);
     }
 }

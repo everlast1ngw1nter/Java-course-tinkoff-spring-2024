@@ -1,6 +1,6 @@
 package edu.java.scrapper.jdbc;
 
-import edu.java.domain.jdbcdao.ChatDao;
+import edu.java.domain.jdbcdao.JdbcChatDao;
 import edu.java.scrapper.IntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ChatDaoTest extends IntegrationTest {
+public class JdbcChatDaoTest extends IntegrationTest {
 
     @Test
     @Transactional
@@ -22,7 +22,7 @@ public class ChatDaoTest extends IntegrationTest {
                 .password(POSTGRES.getPassword())
                 .build();
         var jdbcTemplate = new JdbcTemplate(dataSource);
-        var chatDao = new ChatDao(jdbcTemplate);
+        var chatDao = new JdbcChatDao(jdbcTemplate);
         var chatId = 424241L;
 
         chatDao.add(chatId);

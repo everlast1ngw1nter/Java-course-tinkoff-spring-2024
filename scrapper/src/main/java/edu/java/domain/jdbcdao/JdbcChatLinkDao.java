@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class ChatLinkDao {
+public class JdbcChatLinkDao {
 
     private final JdbcTemplate jdbcTemplate;
 

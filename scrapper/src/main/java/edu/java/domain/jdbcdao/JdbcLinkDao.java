@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class LinkDao {
+public class JdbcLinkDao {
 
     private final JdbcTemplate jdbcTemplate;
 
