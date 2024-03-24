@@ -1,17 +1,27 @@
 package edu.java.bot.messageprocessor;
 
+import edu.java.bot.clients.ScrapperWebClient;
+
 public class ProcessorHolder {
 
     private ProcessorHolder() {
     }
 
-    public static final AbstractProcessor PROCESSOR = new StartProcessor(
-            new HelpProcessor(
-                    new TrackProcessor(
-                            new UntrackProcessor(
-                                    new ListProcessor(
-                                            new TrackingSiteProcessor(
-                                                    new UntrackingSiteProcessor(
-                                                            new UnknownProcessor(null)
-                                                    )))))));
+    public static AbstractProcessor getProcessor(ScrapperWebClient scrapperWebClient) {
+        return new StartProcessor(
+                new HelpProcessor(
+                        new TrackProcessor(
+                                new UntrackProcessor(
+                                        new ListProcessor(
+                                                new TrackingSiteProcessor(
+                                                        new UntrackingSiteProcessor(
+                                                                new UnknownProcessor(null),
+                                                                scrapperWebClient
+                                                        ), scrapperWebClient
+                                                ), scrapperWebClient
+                                        )
+                                )
+                        )
+                ), scrapperWebClient);
+    }
 }

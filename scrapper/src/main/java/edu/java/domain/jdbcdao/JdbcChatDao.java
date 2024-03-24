@@ -1,4 +1,4 @@
-package edu.java.domain;
+package edu.java.domain.jdbcdao;
 
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class ChatDao {
+public class JdbcChatDao {
 
     private final JdbcTemplate jdbcTemplate;
 

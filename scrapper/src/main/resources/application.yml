@@ -6,6 +6,7 @@ app:
   githubBaseUrl: https://api.github.com/repos
   stackoverflowBaseUrl: https://api.stackexchange.com/2.3/questions
   botBaseUrl: http://localhost:8090
+  database-access-type: jdbc
 
 spring:
   application:

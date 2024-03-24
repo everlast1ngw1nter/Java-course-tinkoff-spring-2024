@@ -1,5 +1,6 @@
 package edu.java.configuration;
 
+import edu.java.configuration.accesstype.AccessType;
 import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,7 +13,9 @@ public record ApplicationConfig(
     Scheduler scheduler,
     String githubBaseUrl,
     String stackOverflowBaseUrl,
-    String botBaseUrl
+    String botBaseUrl,
+    @NotNull
+    AccessType databaseAccessType
 ) {
     public record Scheduler(boolean enable, @NotNull Duration interval, @NotNull Duration forceCheckDelay) {
     }
