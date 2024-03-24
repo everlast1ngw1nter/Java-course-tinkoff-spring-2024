@@ -1,6 +1,7 @@
-package edu.java.scrapper;
+package edu.java.scrapper.jdbc;
 
-import edu.java.domain.ChatDao;
+import edu.java.domain.jdbcdao.ChatDao;
+import edu.java.scrapper.IntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;

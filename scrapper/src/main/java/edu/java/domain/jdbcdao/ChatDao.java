@@ -1,4 +1,4 @@
-package edu.java.domain;
+package edu.java.domain.jdbcdao;
 
 
 import java.util.ArrayList;

@@ -1,9 +1,10 @@
-package edu.java.scrapper;
+package edu.java.scrapper.jdbc;
 
-import edu.java.domain.ChatDao;
-import edu.java.domain.ChatLinkDao;
-import edu.java.domain.LinkDao;
+import edu.java.domain.jdbcdao.ChatDao;
+import edu.java.domain.jdbcdao.ChatLinkDao;
+import edu.java.domain.jdbcdao.LinkDao;
 import edu.java.domain.LinkDto;
+import edu.java.scrapper.IntegrationTest;
 import java.sql.Timestamp;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LinkDaoTest extends IntegrationTest{
+public class LinkDaoTest extends IntegrationTest {
 
     @Test
     @Transactional

@@ -1,5 +1,6 @@
-package edu.java.domain;
+package edu.java.domain.jdbcdao;
 
+import edu.java.domain.LinkDto;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;

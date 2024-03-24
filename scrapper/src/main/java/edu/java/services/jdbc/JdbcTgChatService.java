@@ -1,6 +1,6 @@
 package edu.java.services.jdbc;
 
-import edu.java.domain.ChatDao;
+import edu.java.domain.jdbcdao.ChatDao;
 import edu.java.services.TgChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

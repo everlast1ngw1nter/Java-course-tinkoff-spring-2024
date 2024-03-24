@@ -1,7 +1,7 @@
 package edu.java.services.jdbc;
 
-import edu.java.domain.ChatLinkDao;
-import edu.java.domain.LinkDao;
+import edu.java.domain.jdbcdao.ChatLinkDao;
+import edu.java.domain.jdbcdao.LinkDao;
 import edu.java.domain.LinkDto;
 import edu.java.models.responses.LinkResponse;
 import edu.java.models.responses.ListLinksResponse;
