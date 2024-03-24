@@ -15,7 +15,8 @@ public class ListProcessor extends AbstractProcessor {
     @Override
     public String process(Update elem) {
         if (elem.message().text().strip().equals("/list")) {
-            return "The list of links is shown";
+            var response = scrapperWebClient.getLinks(elem.message().chat().id());
+            return response.links().toString();
         }
         return nextMessageProcessor.process(elem);
     }

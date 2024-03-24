@@ -15,6 +15,7 @@ public class StartProcessor extends AbstractProcessor {
     @Override
     public String process(Update elem) {
         if (elem.message().text().strip().equals("/start")) {
+            scrapperWebClient.registerChat(elem.message().chat().id());
             return "The user is registered";
         }
         return nextMessageProcessor.process(elem);
