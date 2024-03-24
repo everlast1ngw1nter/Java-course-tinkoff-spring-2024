@@ -1,5 +1,15 @@
 package edu.java.scrapper;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import liquibase.Contexts;
+import liquibase.LabelExpression;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.DirectoryResourceAccessor;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.JdbcDatabaseContainer;
@@ -11,17 +21,35 @@ public abstract class IntegrationTest {
     public static PostgreSQLContainer<?> POSTGRES;
 
     static {
-        POSTGRES = new PostgreSQLContainer<>("postgres:15")
+        POSTGRES = new PostgreSQLContainer<>("postgres:16")
             .withDatabaseName("scrapper")
             .withUsername("postgres")
             .withPassword("postgres");
         POSTGRES.start();
 
-        runMigrations(POSTGRES);
+        try {
+            runMigrations(POSTGRES);
+        } catch (LiquibaseException | SQLException | FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private static void runMigrations(JdbcDatabaseContainer<?> c) {
-        // ...
+    private static void runMigrations(JdbcDatabaseContainer<?> c) throws LiquibaseException, SQLException, FileNotFoundException {
+        var jdbcUrl = c.getJdbcUrl();
+        var login = c.getUsername();
+        var password = c.getPassword();
+        var connection = DriverManager.getConnection(jdbcUrl, login, password);
+        var database = DatabaseFactory.getInstance()
+                .findCorrectDatabaseImplementation(new JdbcConnection(connection));
+        var changelogPath = new File("").toPath()
+                .toAbsolutePath()
+                .getParent()
+                .resolve("migrations");
+        var liquibase = new liquibase.Liquibase(
+                "master.xml",
+                new DirectoryResourceAccessor(changelogPath),
+                database);
+        liquibase.update(new Contexts(), new LabelExpression());
     }
 
     @DynamicPropertySource
