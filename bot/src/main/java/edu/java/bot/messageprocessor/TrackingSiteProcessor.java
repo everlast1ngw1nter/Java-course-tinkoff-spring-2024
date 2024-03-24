@@ -5,7 +5,6 @@ import edu.java.bot.Bot;
 import edu.java.bot.BotStatus;
 import edu.java.bot.clients.ScrapperWebClient;
 import edu.java.models.requests.AddLinkRequest;
-import edu.java.models.requests.RemoveLinkRequest;
 import java.net.URI;
 
 public class TrackingSiteProcessor extends AbstractProcessor {

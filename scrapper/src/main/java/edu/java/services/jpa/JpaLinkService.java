@@ -44,7 +44,7 @@ public class JpaLinkService implements LinkService {
 
     @Override
     public void remove(long tgChatId, URI url) {
-        var linkId = (long)url.toString().hashCode();
+        var linkId = (long) url.toString().hashCode();
         jpaLinkDao.deleteById(linkId);
         jpaChatLinkDao.deleteByLinkIdAndChatId(linkId, tgChatId);
     }
@@ -77,9 +77,9 @@ public class JpaLinkService implements LinkService {
         var links = listStaleLinks
                 .stream()
                 .map(staleLink -> (new LinkResponse(
-                        ((Link)staleLink[0]).getId(),
+                        ((Link) staleLink[0]).getId(),
                         URI.create(((Link) staleLink[0]).getUrl()),
-                        ((Chat)staleLink[1]).getId())))
+                        ((Chat) staleLink[1]).getId())))
                 .toList();
         return new ListLinksResponse(links, links.size());
     }
