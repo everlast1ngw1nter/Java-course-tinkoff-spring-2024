@@ -1,11 +1,15 @@
 package edu.java.bot.messageprocessor;
 
 import com.pengrad.telegrambot.model.Update;
+import edu.java.bot.clients.ScrapperWebClient;
 
 public class ListProcessor extends AbstractProcessor {
 
-    public ListProcessor(AbstractProcessor nextProcessor) {
+    private final ScrapperWebClient scrapperWebClient;
+
+    public ListProcessor(AbstractProcessor nextProcessor, ScrapperWebClient scrapperWebClient) {
         super(nextProcessor);
+        this.scrapperWebClient = scrapperWebClient;
     }
 
     @Override

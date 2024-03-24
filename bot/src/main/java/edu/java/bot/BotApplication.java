@@ -1,5 +1,6 @@
 package edu.java.bot;
 
+import edu.java.bot.clients.ScrapperWebClient;
 import edu.java.bot.configuration.ApplicationConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +12,7 @@ public class BotApplication {
     public static void main(String[] args) {
         var context = SpringApplication.run(BotApplication.class, args);
         var config = context.getBean(ApplicationConfig.class);
-        var bot = new Bot(config);
+        var bot = new Bot(config, (ScrapperWebClient) context.getBean("scrapperWebClient"));
         bot.start();
     }
 }

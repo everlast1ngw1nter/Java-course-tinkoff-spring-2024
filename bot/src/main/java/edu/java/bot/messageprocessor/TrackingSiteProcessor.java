@@ -3,10 +3,15 @@ package edu.java.bot.messageprocessor;
 import com.pengrad.telegrambot.model.Update;
 import edu.java.bot.Bot;
 import edu.java.bot.BotStatus;
+import edu.java.bot.clients.ScrapperWebClient;
 
 public class TrackingSiteProcessor extends AbstractProcessor {
-    public TrackingSiteProcessor(AbstractProcessor nextProcessor) {
+
+    private final ScrapperWebClient scrapperWebClient;
+
+    public TrackingSiteProcessor(AbstractProcessor nextProcessor, ScrapperWebClient scrapperWebClient) {
         super(nextProcessor);
+        this.scrapperWebClient = scrapperWebClient;
     }
 
     @Override
